@@ -26,6 +26,9 @@ jobs:
       - name: GetEnv
         run: go env
 
+      - name: cd main
+        run: cd main
+
       - name: Build for Windows
         run: GOOS=windows GOARCH=amd64 go build -o gofreeproxy-windows-amd64.exe
 
