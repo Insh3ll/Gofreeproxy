@@ -134,10 +134,11 @@ func IsProxy(proxyIp string, Time int) (isProxy bool) {
 	}
 }
 
-func Startgetsocks(Coroutine int, Time int, useFofa bool, useQuake bool, useHunter bool, renew bool) {
+func Startgetsocks(Coroutine int, Time int, useFofa bool, useQuake bool, useHunter bool, renew bool, search string) {
 	GETRES := []string{}
 	if useFofa {
-		fofakeys := "protocol=\"socks5\" && \"Method:No Authentication(0x00)\""
+		// fofakeys := "protocol=\"socks5\" && \"Method:No Authentication(0x00)\""
+		fofakeys := search
 		FOFA := fofa.Fafaall(fofakeys)
 		GETRES = append(GETRES, FOFA...)
 		color.RGBStyleFromString("237,64,35").Printf("[+]从fofa获取代理:%d条", len(FOFA))

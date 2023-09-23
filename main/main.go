@@ -11,6 +11,7 @@ var (
 	Quake     bool
 	Hunter    bool
 	Renew     bool
+	Search    string
 	Port      string
 	Host      string
 	File      bool
@@ -24,6 +25,7 @@ func main() {
 	flag.BoolVar(&Fofa, "fofa", false, "\n使用-fofa参数可从fofa收集资产获取公开代理使用")
 	flag.BoolVar(&Hunter, "hunter", false, "\n使用-hunter参数可从fofa收集资产获取公开代理使用")
 	flag.BoolVar(&Quake, "quake", false, "\n使用-quake参数可从hunter收集资产获取公开代理使用")
+	flag.StringVar(&Search, "search", "protocol==\"socks5\" && \"Version:5 Method:No Authentication(0x00)\" && after=\"2022-08-01\" && country=\"CN\"", "\n搜索规则")
 	flag.StringVar(&Host, "h", "127.0.0.1", "\n使用自定义本地服务监听地址，默认为127.0.0.1")
 	flag.BoolVar(&Renew, "renew", false, "\n当启用-fofa或-quake或-hunter参数时是否对现有proxy.txt进行重写，默认为否")
 	flag.BoolVar(&File, "f", false, "\n使用-f参数可读取当前目录下的proxy.txt，获取其中的代理使用")
@@ -33,7 +35,7 @@ func main() {
 	flag.Parse()
 
 	if Fofa || Quake || Hunter {
-		console.Startgetsocks(Coroutine, Time, Fofa, Quake, Hunter, Renew)
+		console.Startgetsocks(Coroutine, Time, Fofa, Quake, Hunter, Renew, Search)
 		console.Strartsocks(Port, Host)
 	} else if File == true {
 		console.Readfileproxy(Coroutine, Time)
