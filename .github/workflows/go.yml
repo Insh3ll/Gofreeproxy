@@ -20,8 +20,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
         
       - name: Testpwd
         run: go env -w GO111MODULE=on
@@ -36,10 +36,10 @@ jobs:
         run: GOOS=windows GOARCH=amd64 go build -o gofreeproxy-windows-amd64.exe main.go
 
       - name: Build for Linux
-        run: GOOS=linux GOARCH=amd64 go build -o gofreeproxy-linux-amd64
+        run: GOOS=linux GOARCH=amd64 go build -o gofreeproxy-linux-amd64 main.go
 
       - name: Build for macOS
-        run: GOOS=darwin GOARCH=amd64 go build -o gofreeproxy-darwin-amd64
+        run: GOOS=darwin GOARCH=amd64 go build -o gofreeproxy-darwin-amd64 main.go
       - name: Zip binaries
         run: |
           zip gofreeproxy-windows-amd64.zip gofreeproxy-windows-amd64.exe
